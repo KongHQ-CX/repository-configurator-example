@@ -1,0 +1,18 @@
+config:
+  portal: false
+rbac:
+- role: readonlyrole
+  permissions:
+  - endpoint: "*"
+    negative: false
+    actions: "read"
+plugins:
+- name: "file-log"
+  config:
+    path: /dev/stdout
+    reopen: false
+- name: "correlation-id"
+  config:
+    header_name: Kong-Request-ID
+    generator: "uuid#counter"
+    echo_downstream: false

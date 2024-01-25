@@ -1,0 +1,21 @@
+stages:
+ - sync
+
+sync_workspaces:
+  stage: sync
+  script: |
+    # This writes some simple configuration to disk
+    cat <<EOF > .env
+    ADMIN_TOKEN=token
+    AUTH_METHOD=RBAC
+    KONG_ADDR=https://kong-admin.test.konghq.com
+    CONFIG_DIR=$(pwd)/config
+    EOF
+    #
+
+    # The "./config/" directory is where you put all your workspace bootstrap files (in this repository)
+
+    # FIRST YOU MUST INSTALL https://github.com/Kong/workspace-config-apply-nodejs/ somewhere on the runner
+    # THEN YOU CALL THE "configurator.js" FROM WHEREVER YOU INSTALLED IT
+    # FOLLOW THE README
+    node /home/gitlab-runner/tools/workspace-config-apply-nodejs/configurator.js all

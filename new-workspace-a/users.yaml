@@ -1,0 +1,5 @@
+---
+- name: nobodya
+  email: nobody-a@konghq.com
+  roles:
+  - readonlyrole
